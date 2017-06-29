@@ -9,9 +9,19 @@ using Thinktecture.IdentityModel.Http;
 
 namespace Thinktecture.IdentityModel.Tokens
 {
+    //JwtSecurityTokenHandler which need Assembly of System.IdentityModel.Tokens.Jwt, Version=3.0.0.0
     public class JwtSecurityTokenHandlerWrapper : JwtSecurityTokenHandler
     {
         TokenValidationParameters validationParams;
+        
+        public JWTSecurityTokenHandlerWrapper(string audience)
+		{
+			TokenValidationParameters tokenValidationParameters = new TokenValidationParameters();
+			tokenValidationParameters.AllowedAudience=audience;
+            tokenValidationParameters.SigningToken=new X509SecurityToken(EmbeddedSTSConstants.SigningCertificate);
+			tokenValidationParameters.ValidIssuer="urn:Thinktecture:EmbeddedSTS";
+			this.validationParams = tokenValidationParameters;
+		}
 
         public JwtSecurityTokenHandlerWrapper(TokenValidationParameters validationParams, Dictionary<string, string> inboundClaimTypeMap = null)
         {
