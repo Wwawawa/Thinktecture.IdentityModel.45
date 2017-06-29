@@ -13,6 +13,11 @@ namespace Thinktecture.IdentityModel.Tokens
     public class JwtSecurityTokenHandlerWrapper : JwtSecurityTokenHandler
     {
         TokenValidationParameters validationParams;
+	
+	public JWTSecurityTokenHandlerWrapper() : 
+            this("")
+		{
+		}
         
         public JWTSecurityTokenHandlerWrapper(string audience)
 		{
